@@ -14,7 +14,7 @@ Welcome! This project is for learning Kubernetes (k8s) by doing everything manua
 
 1. **Create a new cluster:**
    ```sh
-   kind create cluster --config kind-config.yaml
+   k3d cluster create cluster-1 -p "8081:80@loadbalancer"
    ```
    > Uses your custom kind config to set up the cluster.
 
@@ -50,12 +50,20 @@ Welcome! This project is for learning Kubernetes (k8s) by doing everything manua
    ```sh
    kubectl proxy
    ```
+   ```
+   kubectl port-forward -n kubernetes-dashboard service/kubernetes-dashboard 8001:443
+   ```
    > Starts a proxy server to access the dashboard.
    ```sh
    kubectl apply -f dashboard-admin.yaml
    ```
    > Grants admin permissions to the dashboard.
 ---
+7. **(Optional) Deploy the Ingress:**
+   ```sh
+   kubectl apply -f ingress.yaml
+   ```
+   > Creates an Ingress resource to expose your app.
 
 ## Useful kubectl Commands
 
@@ -89,5 +97,5 @@ Happy learning! Add more commands or notes here as you progress.
 - Clean up with `kubectl delete ...` to avoid resource clutter.
 
 ## Dashboard
-- Access the dashboard at `http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/`
+- Access the dashboard at `https://localhost:8001`
 - Use the token from `kubectl -n kubernetes-dashboard create token admin-user`

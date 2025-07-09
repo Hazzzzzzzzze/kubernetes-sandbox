@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sample-app
-        image: k8s.gcr.io/hpa-example
+        image: stefanprodan/podinfo
         ports:
         - containerPort: 80
         resources:
@@ -34,4 +34,4 @@ spec:
     app: sample-app
   ports:
   - port: 80
-    targetPort: 80
+    targetPort: 9898
